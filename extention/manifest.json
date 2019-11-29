@@ -1,0 +1,16 @@
+{
+    "name": "TweetMyHistory",
+    "version": "1.0.0",
+    "manifest_version": 2,
+    "description": "Randomly tweets a Google search from your chrome history.",
+    "homepage_url": "http://github.com/ryncmrfrd/tweetmyhistory",
+    "browser_action": {
+      "default_title": "Tweet!",
+      "default_popup": "popup.html"
+    },
+    "permissions": [
+      "activeTab",
+      "history"
+    ]
+  }
+  

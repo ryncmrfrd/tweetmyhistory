@@ -1,0 +1,19 @@
+body{
+    height: 200px;
+    width: 500px;
+}
+
+#loading{
+    height: 100%;
+    width: 100%;
+}
+
+#result{
+    display: none;
+    height: 100%;
+    width: 100%;
+}
+
+.media-content{
+    overflow: hidden;
+}

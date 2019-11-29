@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <title>Tweet My History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" integrity="sha256-8B1OaG0zT7uYA572S2xOxWACq9NXYPQ+U5kHPV1bJN4=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./popup.css" />
+</head>
+<body>
+
+    <a id="loading" class="button is-large is-loading has-background-white">
+        Button
+    </a>
+
+    <div id="result" class="card">
+        <div class="card-content">
+            <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                  </figure>
+            </div>
+            <div class="media-content">
+                  <p class="title is-4"><span id="userName">Ryan Comerford</span></p>
+                  <p class="subtitle is-6">@<span id="userTag">ryncmrfrd</span></p>
+            </div>
+        </div>
+        <div class="content">
+            On the "date" I searched for "searchQuery" on Google. <a>@ryncmrfrd</a>. <a href="#">#tweetmyhistory</a>
+            <br>
+            <time><span id="dateTile">11:09 PM - 1 Jan 2016</span></time>
+        </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
