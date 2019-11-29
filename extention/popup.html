@@ -1,33 +1,35 @@
 <!DOCTYPE html>
+<html lang="EN">
 <head>
     <title>Tweet My History</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css" integrity="sha256-8B1OaG0zT7uYA572S2xOxWACq9NXYPQ+U5kHPV1bJN4=" crossorigin="anonymous" />
+    <meta charset="UTF-8">
+    <meta name="description" content="Randomly tweets a Google search from your chrome history.">
+    <meta name="author" content="Ryan Comerford">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./bulma.css" />
     <link rel="stylesheet" href="./popup.css" />
 </head>
 <body>
-
-    <a id="loading" class="button is-large is-loading has-background-white">
-        Button
-    </a>
-
+    <a id="loading" class="button is-large is-loading has-background-white">loading ...</a>
     <div id="result" class="card">
         <div class="card-content">
             <div class="media">
                 <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                  </figure>
+                    <figure class="image is-48x48">
+                        <img class="is-rounded" src="./profile.png" alt="Profile">
+                    </figure>
+                </div>
+                <div class="media-content" style="filter:blur(5px);">
+                    <p class="title is-4">Your Account</p>
+                    <p class="subtitle is-6">@youAreANerd</p>
+                </div>
             </div>
-            <div class="media-content">
-                  <p class="title is-4"><span id="userName">Ryan Comerford</span></p>
-                  <p class="subtitle is-6">@<span id="userTag">ryncmrfrd</span></p>
+            <div class="content">
+                <span id="tweetText"></span> <span class='has-text-link'>@ryncmrfrd #tweetmyhistory</span>
             </div>
-        </div>
-        <div class="content">
-            On the "date" I searched for "searchQuery" on Google. <a>@ryncmrfrd</a>. <a href="#">#tweetmyhistory</a>
-            <br>
-            <time><span id="dateTile">11:09 PM - 1 Jan 2016</span></time>
-        </div>
+            <footer class="card-footer">
+                <a id="twitterShareButton" class="card-footer-item button is-link is-rounded">Tweet?</a>
+            </footer>
         </div>
     </div>
 
