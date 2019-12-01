@@ -1,0 +1,25 @@
+{
+  "name": "Tweet My History",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "Randomly tweets a Google search from your chrome history.",
+  "homepage_url": "http://github.com/ryncmrfrd/tweetmyhistory",
+  "icons": { 
+    "32": "./img/favicon_32.png",
+    "64": "./img/favicon_64.png",
+    "128": "./img/favicon_128.png"
+  },
+  "browser_action": {
+    "default_title": "Tweet?",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "32": "./img/favicon_32.png",
+      "64": "./img/favicon_64.png",
+      "128": "./img/favicon_128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "history"
+  ]
+}

@@ -1,28 +1,34 @@
 body{
     height: auto !important;
-    width: 500px !important;
+    width: 500px !important
 }
 
 #loading{
     height: 200px !important;
-    width: 100% !important;
+    width: 100% !important
 }
 
 #result{
-    display: none;
+    display: none
 }
 
 .media, .content{
-    user-select: none !important;
+    user-select: none !important
 }
 
 .card-content{
-    padding-bottom: 1rem !important;
+    padding-bottom: 1rem !important
 }
 
 .content{
-    margin-bottom: .25rem !important;
+    margin-bottom: .25rem !important
 }
+
+
+.media, .content{
+    filter: blur(4px);
+}
+
 
 .card-footer{
     border-top: none !important
@@ -31,5 +37,5 @@ body{
 .card-footer #twitterShareButton{
     margin-left: auto !important;
     min-width: 100px !important; 
-    max-width: 101px !important;
+    max-width: 101px !important
 }
