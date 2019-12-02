@@ -10,7 +10,19 @@
     <link rel="stylesheet" href="./css/popup.css" />
 </head>
 <body>
-    <a id="loading" class="button is-large is-loading has-background-white">loading ...</a>
+    <div id="result" class="card">
+        <div class="card-content">
+            <div class="content" style="text-align:center;margin-bottom:1rem;">
+                <p class="title is-4">Tweet My History <span class="icon-twitter"></span></p>
+            </div>
+            <div class="content" style="margin-bottom:1rem;">
+                <span id="tweetText"></span> <span class='has-text-grey'>Tweets a random item from your recent Google search history.</span>
+            </div>
+            <footer class="card-footer" style="border-top: none;">
+                <a id="twitterShareButton" class="card-footer-item button is-link is-rounded" onclick="initiateTweet()">Give it a try?</a>
+            </footer>
+        </div>
+    </div>
     <script src="./js/app.js"></script>
 </body>
 </html>

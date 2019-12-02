@@ -7,41 +7,41 @@ function go() {
     });
 }
 
-go().then(items => {
-    var $data = items,
-        $filteredData = [];
-
-    $filteredData = $data.filter(item => { if ((new URL(item.url)).host == 'www.google.com' && (new URL(item.url)).searchParams.get('q')) return item })
-    console.log("Search history data:", $filteredData)
-
-    const $historyItem = $filteredData[Math.floor((Math.random() * $filteredData.length))]
-    console.log("Random search history item:", $historyItem)
-
-    const $searchTime = new Date($historyItem.lastVisitTime),
-          $tweetText = `On ${$searchTime.getDate()}/${$searchTime.getMonth()}/${$searchTime.getFullYear()} I searched for "${(new URL($historyItem.url)).searchParams.get('q')}" on Google`;
-
-    var $tabID;
-    chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, tabs => {
-        $tabID = tabs[0].id;
-
-        chrome.tabs.update($tabID, { url: `https://twitter.com/intent/tweet?text=${$tweetText.replace(" ", "%20").replace("#", "%23")}%20@ryncmrfrd%20%23tweetmyhistory` }, () => {
-            var listener = chrome.tabs.onUpdated.addListener((tabId, info) => {
-                if (info.status === 'complete' && tabId === $tabID) {
-                    chrome.tabs.onUpdated.removeListener(listener);
-                    chrome.tabs.executeScript($tabID, { code: "document.body.style.filter='blur(5px)'; document.querySelector('.button.selected.submit').click();" }, () => {
-                        var nestedListener = chrome.tabs.onUpdated.addListener((tabId, info) => {
-                            chrome.tabs.remove($tabID, () => {
-                                chrome.tabs.onUpdated.removeListener(nestedListener);
-                                resolve();
+document.querySelector("#twitterShareButton").addEventListener("click", () => {
+    go().then(items => {
+        var $data = items,
+            $filteredData = [];
+    
+        $filteredData = $data.filter(item => { if ((new URL(item.url)).host == 'www.google.com' && (new URL(item.url)).searchParams.get('q')) return item })
+    
+        const $historyItem = $filteredData[Math.floor((Math.random() * $filteredData.length))],
+              $searchTime = new Date($historyItem.lastVisitTime),
+              $tweetText = `On ${$searchTime.getDate()}/${$searchTime.getMonth()}/${$searchTime.getFullYear()} I searched for "${(new URL($historyItem.url)).searchParams.get('q')}" on Google`;
+    
+        var $tabID;
+        chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, tabs => {
+            $tabID = tabs[0].id;
+    
+            chrome.tabs.update($tabID, { url: `https://twitter.com/intent/tweet?text=${$tweetText.replace(" ", "%20").replace("#", "%23")}%20@ryncmrfrd%20%23tweetmyhistory` }, () => {
+                var listener = chrome.tabs.onUpdated.addListener((tabId, info) => {
+                    if (info.status === 'complete' && tabId === $tabID) {
+                        chrome.tabs.onUpdated.removeListener(listener);
+                        chrome.tabs.executeScript($tabID, { code: "document.body.style.filter='blur(5px)'; document.querySelector('.button.selected.submit').click();" }, () => {
+                            var nestedListener = chrome.tabs.onUpdated.addListener((tabId, info) => {
+                                chrome.tabs.remove($tabID, () => {
+                                    chrome.tabs.onUpdated.removeListener(nestedListener);
+                                    resolve();
+                                });
                             });
                         });
-                    });
-                }
+                    }
+                });
             });
         });
+    
     });
+})
 
-});
 
 var nextEndTimeToUse = 0,
     allItems = [],
