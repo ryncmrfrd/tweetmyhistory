@@ -19,6 +19,7 @@
     }
   },
   "permissions": [
+    "https://twitter.com/",
     "activeTab",
     "history"
   ]

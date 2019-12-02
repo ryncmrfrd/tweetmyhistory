@@ -1,41 +1,9 @@
 body{
     height: auto !important;
-    width: 500px !important
+    width: 300px !important
 }
 
 #loading{
     height: 200px !important;
     width: 100% !important
-}
-
-#result{
-    display: none
-}
-
-.media, .content{
-    user-select: none !important
-}
-
-.card-content{
-    padding-bottom: 1rem !important
-}
-
-.content{
-    margin-bottom: .25rem !important
-}
-
-
-.media, .content{
-    filter: blur(4px);
-}
-
-
-.card-footer{
-    border-top: none !important
-}
-
-.card-footer #twitterShareButton{
-    margin-left: auto !important;
-    min-width: 100px !important; 
-    max-width: 101px !important
 }
