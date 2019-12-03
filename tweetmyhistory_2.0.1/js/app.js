@@ -1,3 +1,13 @@
+const $toggleSwitch = document.querySelector("#toggleSwitch");
+
+chrome.storage.sync.get("tweetmyhistory_autoMode", result => {
+    $toggleSwitch.checked = result.tweetmyhistory_autoMode;
+});
+
+$toggleSwitch.addEventListener("change", (elem) => {
+    chrome.storage.sync.set({"tweetmyhistory_autoMode": elem.target.checked});
+})
+
 function go() {
     return new Promise((resolve) => {
         getMoreHistory().then(cnt => {

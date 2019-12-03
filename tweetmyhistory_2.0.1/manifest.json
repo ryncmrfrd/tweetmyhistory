@@ -1,6 +1,6 @@
 {
   "name": "Tweet My History",
-  "version": "1.2",
+  "version": "2.0",
   "manifest_version": 2,
   "description": "Randomly tweets a Google search from your history.",
   "homepage_url": "http://github.com/ryncmrfrd/tweetmyhistory",
@@ -8,6 +8,9 @@
     "32": "./img/favicon_32.png",
     "64": "./img/favicon_64.png",
     "128": "./img/favicon_128.png"
+  },
+  "background": {
+    "scripts": ["./js/background.js"]
   },
   "browser_action": {
     "default_title": "Tweet?",
@@ -19,8 +22,9 @@
     }
   },
   "permissions": [
-    "https://twitter.com/",
-    "activeTab",
-    "history"
+    "<all_urls>",
+    "tabs",
+    "history",
+    "storage"
   ]
 }
