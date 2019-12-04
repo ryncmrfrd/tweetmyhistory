@@ -3,40 +3,47 @@
 <head>
     <title>Tweet My History</title>
     <meta charset="UTF-8">
-    <meta name="description" content="Randomly tweets a Google search from your chrome history.">
+    <meta name="description" content="Tweets a random item from your recent Google search history.">
     <meta name="author" content="Ryan Comerford">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/bulma.css" />
     <link rel="stylesheet" href="./css/popup.css" />
+    <link rel="stylesheet" href="./css/swiper.min.css">
 </head>
 <body>
-    <div class="card">
-        <div class="card-content">
-            <div class="content" style="text-align:center;margin-bottom:1rem;">
-                <p class="title is-4">Tweet My History</p>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="container">
+                    <div class="content" style="text-align:center;margin-bottom:1rem;">
+                        <p class="title is-4">Tweet My History</p>
+                    </div>
+                    <div class="content" style="margin-bottom:1rem;">
+                        <span class='has-text-grey'>Tweets a random item from your recent Google search history.</span>
+                    </div>
+                    <div class="content" style="border-top: none;">
+                        <a id="twitterShareButton" class="button is-link is-rounded">Give it a try?</a>
+                    </div>
+                </div>
             </div>
-            <div class="content" style="margin-bottom:1rem;">
-                <span class='has-text-grey'>Tweets a random item from your recent Google search history.</span>
-            </div>
-            <footer class="card-footer" style="border-top: none;">
-                <a id="twitterShareButton" class="card-footer-item button is-link is-rounded">Give it a try?</a>
-            </footer>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-content has-text-centered">
-            <div class="content" style="margin-bottom:1rem;" data-tooltip="Tweets in the background every now and again ...">
-                <p class="subtitle i-4">Enable Auto Mode</p>
-            </div>
-            <div class="content">
-                <div class="field">
-                    <input id="toggleSwitch" type="checkbox">
+            <div class="swiper-slide card">
+                <div class="container">
+                    <p class="subtitle is-4 has-text-centered" style="margin-bottom:1rem">
+                        <span>Auto Mode</span>
+                        <span class="field" style="position:relative;left:10px;bottom:2.5px">
+                            <input id="toggleSwitch" type="checkbox" class="switch is-danger is-rounded">
+                            <label for="toggleSwitch"></label>
+                        </span>
+                    </p>
+                    <p class='has-text-grey'>Tweets in the background every now and again.</p>
                 </div>
             </div>
         </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
     </div>
-
+    <script src="./js/swiper.min.js"></script>
     <script src="./js/app.js"></script>
 </body>
 </html>

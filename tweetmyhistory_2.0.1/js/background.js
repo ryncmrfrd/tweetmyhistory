@@ -1,63 +1,59 @@
-var $timeOut;
+var $timeOut,
 
-chrome.storage.sync.get("tweetmyhistory_autoMode", result => {
-    all({ "tweetmyhistory_autoMode": result})
-});
+//for getHistory()
+    nextEndTimeToUse = 0,
+    allItems = [],
+    itemIdToIndex = {};
 
+chrome.storage.sync.get("tweetmyhistory_autoMode", result => all({ "tweetmyhistory_autoMode": result }) );
 chrome.storage.onChanged.addListener(changes => all(changes) );
 
 function all(changes) {
     if (changes.tweetmyhistory_autoMode) {
         chrome.storage.sync.get("tweetmyhistory_autoMode", result => {
-
             function attemptTweet() {
+                var $randomNumber = Math.floor(Math.random() * 101)
+                console.log($randomNumber)
+                if ($randomNumber == 100) {
+                    go().then(items => {
+                        var $data = items,
+                            $filteredData = [];
 
-                go().then(items => {
-                    var $data = items,
-                        $filteredData = [];
+                        $filteredData = $data.filter(item => { if ((new URL(item.url)).host == 'www.google.com' && (new URL(item.url)).searchParams.get('q')) return item })
 
-                    $filteredData = $data.filter(item => { if ((new URL(item.url)).host == 'www.google.com' && (new URL(item.url)).searchParams.get('q')) return item })
+                        const $historyItem = $filteredData[Math.floor((Math.random() * $filteredData.length))],
+                            $searchTime = new Date($historyItem.lastVisitTime),
+                            $tweetText = `On ${$searchTime.getDate()}/${$searchTime.getMonth()}/${$searchTime.getFullYear()} I searched for "${(new URL($historyItem.url)).searchParams.get('q')}" on Google`;
 
-                    const $historyItem = $filteredData[Math.floor((Math.random() * $filteredData.length))],
-                        $searchTime = new Date($historyItem.lastVisitTime),
-                        $tweetText = `On ${$searchTime.getDate()}/${$searchTime.getMonth()}/${$searchTime.getFullYear()} I searched for "${(new URL($historyItem.url)).searchParams.get('q')}" on Google`;
-
-                    chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, tabs => {
-                        var $tabID = tabs[0].index;
-                        chrome.tabs.create({ url: `https://twitter.com/intent/tweet?text=${$tweetText.replace(" ", "%20").replace("#", "%23")}%20@ryncmrfrd%20%23tweetmyhistory` }, tab => {
-                            var $newTabID = tab.id;
-                            chrome.tabs.highlight({ tabs: [$tabID] }, () => {
-                                $tabID = null;
-                                var listener = chrome.tabs.onUpdated.addListener((tabId, info) => {
-
-                                    if (info.status === 'complete' && tabId === $newTabID) {
-
-                                        chrome.tabs.onUpdated.removeListener(listener);
-
-                                        chrome.tabs.executeScript($newTabID, { code: "document.body.style.filter='blur(5px)'; document.querySelector('.button.selected.submit').click();" }, () => {
-                                            chrome.tabs.onUpdated.addListener(() => {
-                                                if (info.status === 'complete' && tabId === $newTabID) {
-                                                    chrome.tabs.remove($newTabID);
-                                                    $newTabID = null;
-                                                }
+                        chrome.tabs.query({ 'active': true, 'lastFocusedWindow': true }, tabs => {
+                            var $tabID = tabs[0].index;
+                            chrome.tabs.create({ url: `https://twitter.com/intent/tweet?text=${$tweetText.replace(" ", "%20").replace("#", "%23")}%20@ryncmrfrd%20%23tweetmyhistory` }, tab => {
+                                var $newTabID = tab.id;
+                                chrome.tabs.highlight({ tabs: [$tabID] }, () => {
+                                    $tabID = null;
+                                    var listener = chrome.tabs.onUpdated.addListener((tabId, info) => {
+                                        if (info.status === 'complete' && tabId === $newTabID) {
+                                            chrome.tabs.onUpdated.removeListener(listener);
+                                            chrome.tabs.executeScript($newTabID, { code: "document.body.style.filter='blur(5px)'; document.querySelector('.button.selected.submit').click();" }, () => {
+                                                chrome.tabs.onUpdated.addListener(() => {
+                                                    if (info.status === 'complete' && tabId === $newTabID) {
+                                                        chrome.tabs.remove($newTabID);
+                                                        $newTabID = null;
+                                                    }
+                                                });
                                             });
-                                        });
+                                        }
 
-                                    }
-
-                                });
-                            })
+                                    });
+                                })
+                            });
                         });
                     });
-
-                });
-
+                }
                 $timeOut = setTimeout(attemptTweet, 60000);
             }
-
-            if (result.tweetmyhistory_autoMode) $timeOut = setTimeout(attemptTweet, 10000);
+            if (result.tweetmyhistory_autoMode) $timeOut = setTimeout(attemptTweet, 60000);
             else clearTimeout($timeOut);
-
         });
     }
 }
@@ -70,10 +66,6 @@ function go() {
         });
     });
 }
-
-var nextEndTimeToUse = 0,
-    allItems = [],
-    itemIdToIndex = {};
 
 function getMoreHistory() {
     return new Promise((resolve) => {

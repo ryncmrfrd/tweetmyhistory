@@ -1,4 +1,41 @@
 body{
-    height: auto !important;
-    width: 300px !important
+    width: 448px !important;
+    height: 280px !important
+}
+
+.switch[type="checkbox"]:focus + label::before, 
+.switch[type="checkbox"]:focus + label:before{
+    outline: none !important
+}
+
+.switch[type="checkbox"]:focus + label::after, 
+.switch[type="checkbox"]:focus + label:after{
+    outline: none !important
+}
+
+#twitterShareButton{
+    width: calc( 100% - 2rem - 2px) 
+}
+
+.swiper-container{
+    height: 100%;
+    width: 100%;
+}
+
+.swiper-button-next, .swiper-button-prev{
+    transition: opacity .1s;
+}
+
+.swiper-button-disabled{
+    opacity: 0 !important;
+}
+
+.swiper-slide{
+    position: relative;
+}
+
+.swiper-slide .container{
+    position: absolute;
+    top: 50%; right: 50%;
+    transform: translate(50%, -50%)
 }
