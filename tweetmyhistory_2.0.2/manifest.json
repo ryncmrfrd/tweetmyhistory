@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "version": "2.0.2",
+  "name": "Tweet My History",
+  "short_name": "TMH",
+  "author": "Ryan Comerford",
+  "homepage_url": "https://github.com/ryncmrfrd/tweetmyhistory",
+  "description": "Tweets a random item from your recent Google search history.",
+  "icons": { 
+    "16": "favicon_16.png",
+    "48": "favicon_48.png",
+    "128": "favicon_128.png" 
+  },
+  "permissions": [
+    "https://twitter.com/",
+    "tabs",
+    "history",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Tweet My History",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "favicon_16.png",
+      "24": "favicon_24.png",
+      "128": "favicon_32.png" 
+    }
+  },
+  "background": {
+    "scripts": ["./js/background.js"],
+    "persistent": false
+  }
+}
